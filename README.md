@@ -1,4 +1,5 @@
 # Transformer-electricity_demand_forecasting
+This project is based on the Transformer model conducted in November 2023
 
 # Power Prediction Model architecture
 
