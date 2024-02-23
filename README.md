@@ -2,5 +2,4 @@
 
 # Power Prediction Model architecture
 
-![image](https://github.com/twyoon99/Transformer-electricity_demand_forecasting/assets/118956433/c294763d-40a1-400f-ae38-e17f36642b38)
-
+![image](https://github.com/twyoon99/Transformer-electricity_demand_forecasting/assets/118956433/a54b39ac-38f0-45bb-a143-53f68f087635)
