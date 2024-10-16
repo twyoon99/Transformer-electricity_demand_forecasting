@@ -8,7 +8,9 @@ This project is based on the Transformer model conducted in November 2023
  
 
 2. Methods
+   
 2.1 Data Information
+
 데이터셋은 DACON의 한국에너지공단에서 주최한 전력사용량 예측 AI 경진대회 데이터셋을 사용했다. 데이터의 대한 정보는 아래와 같다
 
 <img width="864" alt="image" src="https://github.com/user-attachments/assets/751c83e5-7562-4df8-b33b-43917dc57771">
@@ -20,17 +22,21 @@ This project is based on the Transformer model conducted in November 2023
 	 
  
 2.2 Data Preprocessing
+
 2.2.1 강수량(mm), 일조(hr) 열 제거
+
 Feature 중에 강수량과 일조 2개의 열은 0인 값들이 매우 많아서 학습에 큰 의미가 없을 것 같아서 제거했다
 
  
 2.2.2 데이터 간격을 1시간에서 1일로 변경
+
 데이터셋은 1시간 간격으로 있다. Input 데이터를 넣어서 다음 Step에 대한 예측을 한다면 1시간 뒤를 예측하게 되는 것이다. 하지만 이번 연구는 다음날에 대한 전력을 예측하는 것이기 때문에 하루를 24개로 나타내는 데이터를 평균을 구해 하루를 1개로 나타내는 값으로 바꿔줬다.
 
 <img width="864" alt="image" src="https://github.com/user-attachments/assets/9edd491c-de5e-4f25-bf26-7d31f6315d19">
 
  
 2.2.3 날짜와 관련된 열 추가
+
 전력은 날짜와 상관이 있다. 특히 주말보다 평일의 전력수요가 크기 때문에 날짜와 관련된 Feature를 추가한다.
 
 <img width="866" alt="image" src="https://github.com/user-attachments/assets/6cb8c0fa-5e7d-4a35-945e-63c1b3b1b048">
@@ -38,11 +44,13 @@ Feature 중에 강수량과 일조 2개의 열은 0인 값들이 매우 많아�
 
 
 2.2.4 Z-score로 변환
+
 Feature끼리 스케일 차이가 크기 때문에 Z-score로 변환했다.
 
  
 
 2.2.5 Prepare sequential training feature & label, Data split
+
 Input Data Sequence Length는 7(7일)로 했고 Output은 다음날의 전력이기 때문에 Input의 두 번째 인덱스부터 마지막 인덱스에 해당하는 다음 step에 있는 값을 Target으로 사용한다. 그러기 위해서 Sliding Window(window size = 1)를 사용하여 데이터를 준비한다.
 
 <img width="673" alt="image" src="https://github.com/user-attachments/assets/bf8e039a-879f-4514-b87b-663a3b1905fc">
@@ -68,6 +76,7 @@ Input Data Sequence Length는 7(7일)로 했고 Output은 다음날의 전력이
 
  
 ![image](https://github.com/twyoon99/Transformer-electricity_demand_forecasting/assets/118956433/a54b39ac-38f0-45bb-a143-53f68f087635)
+
 트랜스포머(Transformer) 모델 구조
  
  
@@ -84,6 +93,7 @@ Input Data Sequence Length는 7(7일)로 했고 Output은 다음날의 전력이
 
  
 3. Result
+   
 3.1 Loss Curve
    
 <img width="603" alt="image" src="https://github.com/user-attachments/assets/6e234308-8cc2-4698-8293-ed564bfdf6aa">
