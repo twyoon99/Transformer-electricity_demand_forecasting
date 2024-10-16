@@ -10,10 +10,12 @@ This project is based on the Transformer model conducted in November 2023
 2. Methods
 2.1 Data Information
 데이터셋은 DACON의 한국에너지공단에서 주최한 전력사용량 예측 AI 경진대회 데이터셋을 사용했다. 데이터의 대한 정보는 아래와 같다
+
 <img width="864" alt="image" src="https://github.com/user-attachments/assets/751c83e5-7562-4df8-b33b-43917dc57771">
 
  
 데이터 Feature(Target 포함)에 대한 정보는 아래와 같다
+
 <img width="864" alt="image" src="https://github.com/user-attachments/assets/d752d5e8-8e49-4fc5-8db2-e638b54174af">
 	 
  
@@ -25,13 +27,14 @@ Feature 중에 강수량과 일조 2개의 열은 0인 값들이 매우 많아�
 2.2.2 데이터 간격을 1시간에서 1일로 변경
 데이터셋은 1시간 간격으로 있다. Input 데이터를 넣어서 다음 Step에 대한 예측을 한다면 1시간 뒤를 예측하게 되는 것이다. 하지만 이번 연구는 다음날에 대한 전력을 예측하는 것이기 때문에 하루를 24개로 나타내는 데이터를 평균을 구해 하루를 1개로 나타내는 값으로 바꿔줬다.
 
-데이터 전처리 전 개수	데이터 전처리 후 개수
 <img width="864" alt="image" src="https://github.com/user-attachments/assets/9edd491c-de5e-4f25-bf26-7d31f6315d19">
 
  
 2.2.3 날짜와 관련된 열 추가
 전력은 날짜와 상관이 있다. 특히 주말보다 평일의 전력수요가 크기 때문에 날짜와 관련된 Feature를 추가한다.
+
 <img width="866" alt="image" src="https://github.com/user-attachments/assets/6cb8c0fa-5e7d-4a35-945e-63c1b3b1b048">
+
 
 
 2.2.4 Z-score로 변환
@@ -44,10 +47,13 @@ Input Data Sequence Length는 7(7일)로 했고 Output은 다음날의 전력이
 
 <img width="673" alt="image" src="https://github.com/user-attachments/assets/bf8e039a-879f-4514-b87b-663a3b1905fc">
 
+
  
 준비된 데이터 개수는 아래와 같다
+
 <img width="867" alt="image" src="https://github.com/user-attachments/assets/e772cb4a-3147-4adc-87b0-a98df873562b">
  
+
 
 2.3 Model - Transformer
 
@@ -59,23 +65,27 @@ Input Data Sequence Length는 7(7일)로 했고 Output은 다음날의 전력이
 
 어텐션 기법은 디코더의 매 출력 시점마다, 인코더의 출력값을 탐생하여 입력 시퀀스에 예측 결과에 더 큰 영향을 미치는 부분을 찾을 수 있는 기법이다. 어텐션 연산은 시퀀스 데이터가 주어졌을 때, 어텐션 함수를 통해 연산을 수행한다. 입력 데이터를 고정된 길이의 문맥 벡터에 인코딩할 필요가 없으며 입력 데이터에서 타겟 데이터를 생성하는데 필요한 부분에 집중하므로 신경망 모델의 장기 의존성 문제와 계산의 병렬화 문제를 개선할 수 있다는 장점이 있다. 어텐션 기법의 종류에는 하나의 시퀀스 데이터에 대하여 어텐션 연산을 수행하는 셀프-어텐션(self-attention)과 모델의 인코더 출력과 현 시점의 디코더 입력에 대해 어텐션 연산을 수행하는 인코더-디코더 어텐션이 있다.
 
- 
 
-트랜스포머(Transformer) 모델 구조
+ 
 ![image](https://github.com/twyoon99/Transformer-electricity_demand_forecasting/assets/118956433/a54b39ac-38f0-45bb-a143-53f68f087635)
+트랜스포머(Transformer) 모델 구조
  
  
 
 2.4 Train
 
 하이퍼 파라미터는 다음과 같다
+
 <img width="863" alt="image" src="https://github.com/user-attachments/assets/dc470bfb-1bfb-47cc-a529-31e49b7ff978">
+
+
 
 추가로 매 에포크마다 모델과 Loss 값을 저장시켰으며 추가적으로 MAE(Mean absolute error)도 확인지표로 사용했다.
 
  
 3. Result
 3.1 Loss Curve
+   
 <img width="603" alt="image" src="https://github.com/user-attachments/assets/6e234308-8cc2-4698-8293-ed564bfdf6aa">
  
 
