@@ -7,6 +7,9 @@ This project is based on the Transformer model conducted in November 2023
 
  
 
+
+
+
 2. Methods
    
 2.1 Data Information
@@ -20,12 +23,17 @@ This project is based on the Transformer model conducted in November 2023
 
 <img width="864" alt="image" src="https://github.com/user-attachments/assets/d752d5e8-8e49-4fc5-8db2-e638b54174af">
 	 
+
+
  
 2.2 Data Preprocessing
+
+
 
 2.2.1 강수량(mm), 일조(hr) 열 제거
 
 Feature 중에 강수량과 일조 2개의 열은 0인 값들이 매우 많아서 학습에 큰 의미가 없을 것 같아서 제거했다
+
 
  
 2.2.2 데이터 간격을 1시간에서 1일로 변경
@@ -34,7 +42,8 @@ Feature 중에 강수량과 일조 2개의 열은 0인 값들이 매우 많아�
 
 <img width="864" alt="image" src="https://github.com/user-attachments/assets/9edd491c-de5e-4f25-bf26-7d31f6315d19">
 
- 
+
+
 2.2.3 날짜와 관련된 열 추가
 
 전력은 날짜와 상관이 있다. 특히 주말보다 평일의 전력수요가 크기 때문에 날짜와 관련된 Feature를 추가한다.
@@ -63,6 +72,7 @@ Input Data Sequence Length는 7(7일)로 했고 Output은 다음날의 전력이
  
 
 
+
 2.3 Model - Transformer
 
 이전까지의 sequential modeling은 state transition에 기반을 뒀다. 하지만 state의 거리가 멀어질수록 정보를 반영하기가 어렵다. 이러한 경우 병렬 연산이 필요한데 Transformer가 그러기 때문에 Model로 선택했다. Transformer는 자연어처리에서 사용되던 모델이다. 따라서 입력과 출력의 길이가 다르기 때문에 Encoder-Decoder 구조로 나눠져 있다. 하지만 이번 연구에서는 입력과 출력의 길이가 똑같아도 되기 때문에 Encoder 부분만 사용했다. Transformer는 RNN을 사용하지 않고 Multi-head Attention을 사용한다. 이는 Attention을 자기 자신에게 취하는 Self-Attention을 병렬로 계산하여 관심 있는 item을 다른 item들과 비교하여 현재의 context 내에서 서로의 연관성을 계산한다. 이렇게 되면 좀 더 다양한 관계를 알 수 있다.
@@ -81,6 +91,7 @@ Input Data Sequence Length는 7(7일)로 했고 Output은 다음날의 전력이
  
  
 
+
 2.4 Train
 
 하이퍼 파라미터는 다음과 같다
@@ -91,8 +102,12 @@ Input Data Sequence Length는 7(7일)로 했고 Output은 다음날의 전력이
 
 추가로 매 에포크마다 모델과 Loss 값을 저장시켰으며 추가적으로 MAE(Mean absolute error)도 확인지표로 사용했다.
 
+
+
+
  
 3. Result
+
    
 3.1 Loss Curve
    
@@ -112,6 +127,7 @@ Input Data Sequence Length는 7(7일)로 했고 Output은 다음날의 전력이
 <img width="865" alt="image" src="https://github.com/user-attachments/assets/faca861a-65f0-43e8-a40f-666a0ac989f5">
 
  
+
 
 4. Discussion
 
