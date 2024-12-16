@@ -5,6 +5,7 @@
 ## Introduction
 
 전력 수요 예측은 전력계통의 효율적인 운영과 전력시장의 합리적인 가격 결정에 있어 중요하다. 또한 전력은 저장이 불가능하기 때문에 수요 예측을 바탕으로 미리 준비해야 하기 때문에 매우 중요하다. 딥러닝을 이용한 전력수요 예측은 실험적인 수준이 많으며 아직 실제로 적용된 사례는 많지 않다. 따라서 이번 연구에서는 Transformer를 이용한 다음날 전력 수요 예측을 하려고 한다. 데이터셋은 DACON의 한국에너지공단에서 주최한 전력사용량 예측 AI 경진대회 데이터셋을 사용했다. 데이터셋은 Z-score로 전처리 했으며 전처리한 데이터를 기준으로 Loss는 MSE(Mean Square Error)=0.0695, MAE(Mean absolute error)=0.1863이 나왔다.
+
 ---
 
  
@@ -95,6 +96,7 @@ Input Data Sequence Length는 7(7일)로 했고 Output은 다음날의 전력이
 
 
 추가로 매 에포크마다 모델과 Loss 값을 저장시켰으며 추가적으로 MAE(Mean absolute error)도 확인지표로 사용했다.
+
 ---
 
  
@@ -117,6 +119,7 @@ Input Data Sequence Length는 7(7일)로 했고 Output은 다음날의 전력이
  - ### Test Loss
 
 <img width="865" alt="image" src="https://github.com/user-attachments/assets/faca861a-65f0-43e8-a40f-666a0ac989f5">
+
 ---
 
 
